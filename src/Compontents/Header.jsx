@@ -40,9 +40,9 @@ const Header = () => {
         </Link>
         <Navbar.Toggle />
       </div>
+
       <Navbar.Collapse>
         <Navbar.Link active={path === "/"} as={"div"}>
-          {/* //use to sperate to anchor tag */}
           <Link to="/">Home</Link>
         </Navbar.Link>
         <Navbar.Link active={path === "/about"} as={"div"}>
