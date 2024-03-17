@@ -12,12 +12,30 @@ import { AiOutlineSearch } from "react-icons/ai";
 import { FaMoon, FaSun } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleTheme } from "../redux/themeslice.js";
+import profilePicture from "../assets/profileimage.avif";
 
 const Header = () => {
   const path = useLocation().pathname;
   const dispatch = useDispatch();
   const { currentUser } = useSelector((state) => state.user);
   const { theme } = useSelector((state) => state.theme);
+
+  // const handleSignout = async () => {
+  //   try {
+  //     const res = await fetch("/api/user/signout", {
+  //       method: "POST",
+  //     });
+  //     const data = await res.json();
+  //     if (!res.ok) {
+  //       console.log(data.message);
+  //     } else {
+  //       dispatch(signoutSuccess());
+  //     }
+  //   } catch (error) {
+  //     console.log(error.message);
+  //   }
+  // };
+
   return (
     <Navbar className="border-b-2 border-red-300">
       <Link
@@ -53,14 +71,16 @@ const Header = () => {
           <Dropdown
             arrowIcon={false}
             inline
-            label={<Avatar alt="user" img={currentUser.profilePicture} />}>
+            label={
+              <Avatar alt="user" img={currentUser.profilePicture} rounded />
+            }>
             <Dropdown.Header>
               <span className="block text-sm">@{currentUser.username}</span>
-              <span className="block text-sm font-medium truncate">
+              <span className="block text-sm font-medium truncate ">
                 {currentUser.email}
               </span>
             </Dropdown.Header>
-            <Link to="/dashboard">
+            <Link to={"/dashboard?tab=profile"}>
               <Dropdown.Item>Profile</Dropdown.Item>
             </Link>
             <Dropdown.Divider />
@@ -68,7 +88,7 @@ const Header = () => {
           </Dropdown>
         ) : (
           <Link to="/signin">
-            <Button gradientDuoTone="purpleToBlue" color="gray">
+            <Button gradientDuoTone="purpleToBlue" outline>
               Sign In
             </Button>
           </Link>
